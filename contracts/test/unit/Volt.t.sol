@@ -25,6 +25,15 @@ contract VoltTest is DSTest {
         volt = core.volt();
     }
 
+    // forge test --match-contract Volt --no-match-contract IntegrationTest
+    // 1. if Volt.sol#L30 is keccak256(bytes(name())) -> [PASS] testConstructorGasUsed() (gas: 6620689)
+    // 2. if Volt.sol#L30 is keccak256(bytes("VOLT")) -> [PASS] testConstructorGasUsed() (gas: 6595015)
+    function testConstructorGasUsed() public {
+        core = getCore();
+
+        volt = core.volt();
+    }
+
     function testDeployedMetaData() public {
         assertEq(volt.totalSupply(), 0);
         assertTrue(core.isGovernor(addresses.governorAddress));
